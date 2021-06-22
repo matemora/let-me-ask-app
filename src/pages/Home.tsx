@@ -1,3 +1,6 @@
+import { useHistory } from 'react-router-dom';
+import { useCallback } from 'react';
+import { auth, firebase } from '../services/firebase';
 
 import illustrationImg from '../assets/images/illustration.svg';
 import logoImgSvg from '../assets/images/logo.svg';
@@ -7,6 +10,13 @@ import { Button } from '../components/Button';
 import '../styles/auth.scss';
 
 export function Home() {
+  const history = useHistory();
+
+  const handleCreateRoom = useCallback(() => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider).then(console.log);
+  }, [])
+
   return (
     <div id="page-auth">
       <aside>
@@ -17,7 +27,7 @@ export function Home() {
       <main>
         <div className="main-content">
           <img src={logoImgSvg} alt="logo_letmeask" />
-          <button className="create-room">
+          <button className="create-room" onClick={handleCreateRoom}>
             <img src={googleIconImg} alt="logo_google" />
             Crie sua sala com o google
           </button>
