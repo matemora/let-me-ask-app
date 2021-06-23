@@ -35,6 +35,8 @@ export function Home() {
       return;
     }
 
+    history.push(`rooms/${roomCode}`);
+
   }
 
   return (
