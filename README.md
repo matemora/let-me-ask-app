@@ -1,46 +1,61 @@
-# Getting Started with Create React App
+# Let Me Ask App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Simple real-time Q&A app to be used on livestreams, podcasts and other live events.
 
-## Available Scripts
+App developed during [rocketseat's next level week event](https://rocketseat.com.br/).
 
-In the project directory, you can run:
+![image](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![image](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![image](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
+![image](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)
 
-### `yarn start`
+## Steps to run locally
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+In order to run the app locally you have to:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. Have a project configured in firebase (see how to [create a firebase project here.](https://firebase.google.com/docs/web/setup))
 
-### `yarn test`
+2. Set up google sign-in in authentication (see how to [enable google sign-in in a firebase project here.](https://firebase.google.com/docs/auth/web/google-signin)).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. Register your app on firebase and save sdk config values (see how to [register your app here](https://firebase.google.com/docs/web/setup#register-app)).
 
-### `yarn build`
+4. Set up a `.env.local` variable with information from the previous step as below:
+  
+  ```.env
+  REACT_APP_API_KEY = ""
+  REACT_APP_AUTH_DOMAIN = ""
+  REACT_APP_DATABASE_URL = ""
+  REACT_APP_PROJECT_ID = ""
+  REACT_APP_STORAGE_BUCKET = ""
+  REACT_APP_MESSAGING_SENDER_ID = ""
+  REACT_APP_APP_ID = ""
+  ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+5. Run `npm install` or `yarn install` on the project's root folder.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+6. Run `npm start` or `yarn start` to run the app locally.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+P.S.: Remember to speccify firebase real-time database rules. Basic configuration goes as follows:
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```js
+{
+  "rules": {
+    "rooms": {
+      ".read": false,
+    	".write": "auth != null",
+      "$room_id": {
+        ".read": true,
+        ".write": "auth != null && (!data.exists() || data.child('authorId').val() == auth.id)",
+        "questions": {
+          ".read": true,
+          ".write": "auth != null && (!data.exists() || data.parent().child('authorId').val() == auth.id)",
+          "likes": {
+            ".read": true,
+            ".write": "auth != null && (!data.exists() || data.child('authorId').val() == auth.id)"
+          }
+        }
+      }
+    }
+  }
+}
+```
