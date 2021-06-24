@@ -1,7 +1,4 @@
-<div style="display: flex; justify-content: space-between;">
-  <h1>Let Me Ask App</h1>
-  <img src="https://cdn.jsdelivr.net/gh/matemora/let-me-ask-app@master/src/assets/images/logo.svg">
-</div>
+<img src="./readme-header.svg" alt="Let me ask app" />
 
 Simple real-time Q&A app to be used on livestreams, podcasts and other live events.
 
