@@ -1,7 +1,7 @@
-<h1 style="display: flex; justify-content: space-between; align-items: center;">
-  Let Me Ask App
+<div style="display: flex; justify-content: space-between;">
+  <h1>Let Me Ask App</h1>
   <img src="https://cdn.jsdelivr.net/gh/matemora/let-me-ask-app@master/src/assets/images/logo.svg">
-</h1>
+</div>
 
 Simple real-time Q&A app to be used on livestreams, podcasts and other live events.
 
