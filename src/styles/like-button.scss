@@ -1,0 +1,24 @@
+.like-button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  color: #737380;
+  transition: all 0.2s;
+
+  &.liked {
+    color: #835afd;
+    svg path {
+      stroke: #835afd;
+    }
+  }
+
+  &:hover {
+    color: #835afd;
+    svg path {
+      stroke: #835afd;
+    }
+  }
+}
