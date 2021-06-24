@@ -6,10 +6,11 @@ import { Button } from '../components/Button';
 import { RoomCode } from '../components/RoomCode';
 import { useAuth } from '../hooks/useAuth';
 import { database } from '../services/firebase';
+import { Question } from '../components/Question';
 
 import '../styles/room.scss';
 
-type Question = {
+type QuestionType = {
   id: string;
   author: {
     name: string;
@@ -20,18 +21,18 @@ type Question = {
   isHighlighted: boolean;
 };
 
-type FirebaseQuestions = Record<string, Omit<Question, 'id'>>;
+type FirebaseQuestions = Record<string, Omit<QuestionType, 'id'>>;
 
 type RoomParams = {
   id: string;
 }
 
 export function Room() {
-  const {user} = useAuth();
+  const { user } = useAuth();
   const params = useParams<RoomParams>();
   const roomId = params.id;
   const [newQuestion, setNewQuestion] = useState('');
-  const [questions, setQuestions] = useState<Question[]>([]);
+  const [questions, setQuestions] = useState<QuestionType[]>([]);
   const [title, setTitle] = useState('');
 
   useEffect(() => {
@@ -54,11 +55,11 @@ export function Room() {
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
 
-    if(newQuestion.trim() === '') {
+    if (newQuestion.trim() === '') {
       return;
     }
 
-    if(!user) {
+    if (!user) {
       throw new Error('You must be logged in!');
     }
 
@@ -80,7 +81,7 @@ export function Room() {
       <header>
         <div className="content">
           <img src={logoImg} alt="letmeask_logo" />
-          <RoomCode code={roomId}/>
+          <RoomCode code={roomId} />
         </div>
       </header>
       <main>
@@ -100,14 +101,20 @@ export function Room() {
                 <img src={user.avatar} alt={user.name} />
                 <span>{user.name}</span>
               </div>
-              ) : (
+            ) : (
               <span>Para enviar uma pergunta, <button>faça seu login</button>.</span>
             )}
             <Button type="submit" disabled={!user}>Enviar pergunta</Button>
           </div>
         </form>
-        <div>
-          {JSON.stringify(questions)}
+        <div className="question-list">
+          {questions.map(question => (
+            <Question
+              key={question.id}
+              author={question.author}
+              content={question.content}
+            />
+          ))}
         </div>
       </main>
     </div>
