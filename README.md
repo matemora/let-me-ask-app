@@ -1,4 +1,4 @@
-![](https://cdn.jsdelivr.net/gh/matemora/let-me-ask-app@master/src/assets/images/logo.svg)
+![](/src/assets/images/logo.svg)
 
 # Let me ask app
 
