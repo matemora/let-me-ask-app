@@ -1,10 +1,16 @@
 import { useParams } from "react-router-dom";
+import { database } from "../services/firebase";
 import { Question } from "../components/Question";
 import { Button } from "../components/Button";
 import { RoomCode } from "../components/RoomCode";
 import { useRoom } from "../hooks/useRoom";
+import { DeleteIcon } from "../components/DeleteButton/DeleteIcon";
+import { Modal } from "../components/Modal";
+import { CloseCircleIcon } from "../components/CloseCircleIcon";
 import logoImg from '../assets/images/logo.svg';
 import '../styles/room.scss';
+import { useState } from "react";
+import { useCallback } from "react";
 
 type RoomParams = {
   id: string;
@@ -14,6 +20,20 @@ export function AdminRoom() {
   const params = useParams<RoomParams>();
   const roomId = params.id;
   const { questions, title } = useRoom(roomId);
+  const [showCloseRoomModal, setShowCloseRoomModal] = useState(false);
+  const [questionToDelete, setQuestionToDelete] = useState('');
+  console.log(questionToDelete);
+  async function handleCloseRoom() {
+    await database.ref(`rooms/${roomId}`).update({
+      closedAt: new Date(),
+    });
+    setShowCloseRoomModal(false);
+  }
+
+  const handleDeleteQuestion = useCallback(async (questionId: string) => {
+    await database.ref(`rooms/${roomId}/questions/${questionId}`).remove();
+    setQuestionToDelete('');
+  }, [roomId]);
 
   return (
     <div id="page-room">
@@ -22,7 +42,12 @@ export function AdminRoom() {
           <img src={logoImg} alt="letmeask_logo" />
           <div>
             <RoomCode code={roomId} />
-            <Button isOutlined>Encerrar sala</Button>
+            <Button
+              isOutlined
+              onClick={() => setShowCloseRoomModal(true)}
+            >
+              Encerrar sala
+            </Button>
           </div>
         </div>
       </header>
@@ -37,11 +62,56 @@ export function AdminRoom() {
               key={question.id}
               data={question}
               roomId={roomId}
+              handleDelete={setQuestionToDelete}
               admin
             />
           ))}
         </div>
       </main>
+      <Modal
+        icon={<DeleteIcon color="#E73F5D" />}
+        showModal={questionToDelete !== ''}
+        title="Excluir pergunta"
+        subtitle="Tem certeza que você deseja excluir esta pergunta?"
+        confirmButton={
+          <Button
+            variation="danger"
+            onClick={() => handleDeleteQuestion(questionToDelete)}
+          >
+            Sim, excluir
+          </Button>
+        }
+        cancelButton={
+          <Button
+            variation="cancel"
+            onClick={() => setQuestionToDelete('')}
+          >
+            Cancelar
+          </Button>
+        }
+      />
+      <Modal
+        showModal={showCloseRoomModal}
+        icon={<CloseCircleIcon />}
+        title="Encerrar sala"
+        subtitle="Tem certeza que você deseja encerrar esta sala?"
+        confirmButton={
+          <Button
+            variation="danger"
+            onClick={handleCloseRoom}
+          >
+            Sim, encerrar
+          </Button>
+        }
+        cancelButton={
+          <Button
+            variation="cancel"
+            onClick={() => setShowCloseRoomModal(false)}
+          >
+            Cancelar
+          </Button>
+        }
+      />
     </div>
   )
 }
