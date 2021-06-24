@@ -1,0 +1,18 @@
+.delete-button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+
+  svg path {
+    transition: all 0.2s;
+  }
+  
+  &:hover {
+    svg path {
+      stroke: #E73F5D;
+    }
+  }
+}
