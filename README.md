@@ -1,4 +1,6 @@
-<img src="readme-header.svg" alt="Let me ask app" />
+![](https://cdn.jsdelivr.net/gh/matemora/let-me-ask-app@master/src/assets/images/logo.svg)
+
+# Let me ask app
 
 Simple real-time Q&A app to be used on livestreams, podcasts and other live events.
 
