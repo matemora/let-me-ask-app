@@ -1,4 +1,4 @@
-<img src="./readme-header.svg" alt="Let me ask app" />
+<img src="readme-header.svg" alt="Let me ask app" />
 
 Simple real-time Q&A app to be used on livestreams, podcasts and other live events.
 
