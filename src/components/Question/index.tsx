@@ -1,6 +1,7 @@
 import { useAuth } from '../../hooks/useAuth';
 import { database } from '../../services/firebase';
 import { LikeButton } from '../LikeButton';
+import { DeleteButton } from '../DeleteButton';
 import './styles.scss';
 
 type QuestionProps = {
@@ -26,6 +27,7 @@ export function Question({
   data, roomId, admin = false,
 }: QuestionProps) {
   const { user } = useAuth();
+
   async function handleLikeButtonClick() {
     if (data.userLikeId) {
       await database.ref(`rooms/${roomId}/questions/${data.id}/likes/${data.userLikeId}`).remove();
@@ -33,6 +35,12 @@ export function Question({
       await database.ref(`rooms/${roomId}/questions/${data.id}/likes`).push({
         authorId: user?.id,
       });
+    }
+  }
+
+  async function handleDeleteButtonClick() {
+    if (window.confirm('Tem certeza que deseja excluir essa questão?')) {
+      await database.ref(`rooms/${roomId}/questions/${data.id}`).remove();
     }
   }
 
@@ -47,6 +55,9 @@ export function Question({
         <div className="actions">
           {admin ? (
             <>
+              <DeleteButton
+                onClick={handleDeleteButtonClick}
+              />
             </>
           ) : (
             <LikeButton
