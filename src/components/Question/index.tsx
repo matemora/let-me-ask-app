@@ -7,6 +7,7 @@ import './styles.scss';
 type QuestionProps = {
   data: QuestionType;
   roomId: string;
+  handleDelete?: (questionId: string) => void;
   admin?: boolean;
 };
 
@@ -24,7 +25,7 @@ export type QuestionType = {
 };
 
 export function Question({
-  data, roomId, admin = false,
+  data, roomId, handleDelete, admin = false,
 }: QuestionProps) {
   const { user } = useAuth();
 
@@ -38,12 +39,6 @@ export function Question({
     }
   }
 
-  async function handleDeleteButtonClick() {
-    if (window.confirm('Tem certeza que deseja excluir essa questão?')) {
-      await database.ref(`rooms/${roomId}/questions/${data.id}`).remove();
-    }
-  }
-
   return (
     <div className="question">
       <p>{data.content}</p>
@@ -53,10 +48,10 @@ export function Question({
           <span>{data.author.name}</span>
         </div>
         <div className="actions">
-          {admin ? (
+          {admin && handleDelete ? (
             <>
               <DeleteButton
-                onClick={handleDeleteButtonClick}
+                onClick={() => handleDelete(data.id)}
               />
             </>
           ) : (
