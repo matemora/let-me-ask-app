@@ -47,13 +47,13 @@ P.S.: Remember to specify firebase real-time database rules. Basic configuration
     	".write": "auth != null",
       "$room_id": {
         ".read": true,
-        ".write": "auth != null && (!data.exists() || data.child('authorId').val() == auth.id)",
+        ".write": "auth != null && (!data.exists() || data.child('authorId').val() == auth.uid)",
         "questions": {
           ".read": true,
-          ".write": "auth != null && (!data.exists() || data.parent().child('authorId').val() == auth.id)",
+          ".write": "auth != null && (!data.exists() || data.parent().child('authorId').val() == auth.uid)",
           "likes": {
             ".read": true,
-            ".write": "auth != null && (!data.exists() || data.child('authorId').val() == auth.id)"
+            ".write": "auth != null && (!data.exists() || data.child('authorId').val() == auth.uid)"
           }
         }
       }
