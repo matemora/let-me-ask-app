@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { Question } from "../components/Question";
+import { Button } from "../components/Button";
 import { RoomCode } from "../components/RoomCode";
 import { useRoom } from "../hooks/useRoom";
 import logoImg from '../assets/images/logo.svg';
@@ -19,7 +20,10 @@ export function AdminRoom() {
       <header>
         <div className="content">
           <img src={logoImg} alt="letmeask_logo" />
-          <RoomCode code={roomId} />
+          <div>
+            <RoomCode code={roomId} />
+            <Button>Encerrar sala</Button>
+          </div>
         </div>
       </header>
       <main>
