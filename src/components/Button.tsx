@@ -4,12 +4,15 @@ import '../styles/button.scss';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   isOutlined?: boolean;
+  variation?: "danger" | "primary" | "cancel";
 }
 
-export function Button({isOutlined = false, ...props}: ButtonProps) {
+export function Button({
+  isOutlined = false, variation, ...props
+}: ButtonProps) {
   return (
     <button
-      className={`button ${isOutlined ? 'outlined' : ''}`}
+      className={`button ${variation} ${isOutlined ? 'outlined' : ''}`}
       {...props}
     />
     );

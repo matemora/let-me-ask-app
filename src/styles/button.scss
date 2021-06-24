@@ -38,4 +38,20 @@
       color: #6F4BD8;
     }
   }
+
+  &.danger {
+    background: #E73F5D;
+    &:hover {
+      background: #D73754;
+    }
+  }
+
+  &.cancel {
+    color: #737380;
+    background: #DBDCDD;
+    &:hover {
+      color: #737380;
+      background: #CECECE;
+    }
+  }
 }
