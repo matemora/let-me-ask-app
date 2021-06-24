@@ -87,5 +87,5 @@ export function Room() {
         </div>
       </main>
     </div>
-  )
+  );
 }
