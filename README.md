@@ -37,7 +37,7 @@ In order to run the app locally you have to:
 
 6. Run `npm start` or `yarn start` to run the app locally.
 
-P.S.: Remember to speccify firebase real-time database rules. Basic configuration goes as follows:
+P.S.: Remember to specify firebase real-time database rules. Basic configuration goes as follows:
 
 ```js
 {
