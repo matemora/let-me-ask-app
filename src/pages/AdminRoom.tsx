@@ -35,8 +35,9 @@ export function AdminRoom() {
           {questions.map(question => (
             <Question
               key={question.id}
-              author={question.author}
-              content={question.content}
+              data={question}
+              roomId={roomId}
+              admin
             />
           ))}
         </div>
