@@ -12,9 +12,27 @@ type ModalProps = {
   cancelButton: ReactNode;
 }
 
-export function Modal({
+function ModalContent({
   showModal, title, subtitle, confirmButton, cancelButton, icon,
 }: ModalProps) {
+  return (
+    <div className={`modal-container ${showModal ? 'visible' : 'hidden'}`}>
+      <div>
+        {icon}
+        <div className="info">
+          <h1>{title}</h1>
+          <p>{subtitle}</p>
+        </div>
+        <div className="controls">
+          {cancelButton}
+          {confirmButton}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function Modal(props: ModalProps) {
   const elementRef = useRef(document.createElement('div'));
 
   useEffect(() => {
@@ -31,28 +49,6 @@ export function Modal({
     }
   }, []);
 
-  function ModalContent() {
-    return (
-      <div className={`modal-container ${showModal ? 'visible' : 'hidden'}`}>
-        <div>
-          {icon}
-          <div className="info">
-            <h1>{title}</h1>
-            <p>{subtitle}</p>
-          </div>
-          <div className="controls">
-            {cancelButton}
-            {confirmButton}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (showModal) {
-    return createPortal(<ModalContent />, elementRef.current);
-  }
-
-  return null;
+  return createPortal(<ModalContent  {...props} />, elementRef.current);
 }
 
