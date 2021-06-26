@@ -9,7 +9,9 @@ export const Header: FC = ({
     <header>
       <div className="content">
         <img src={logoImg} alt="letmeask_logo" />
-        {children}
+        <div className="room-controls">
+          {children}
+        </div>
       </div>
     </header>
   );
