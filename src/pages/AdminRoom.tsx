@@ -45,7 +45,7 @@ export function AdminRoom() {
 
   const handleHighlightQuestion = useCallback(async (question: QuestionType) => {
     await database.ref(`rooms/${roomId}/questions/${question.id}`).update({
-      isHIghlighted: !question.isHighlighted,
+      isHighlighted: !question.isHighlighted,
     });
   }, [roomId]);
 
@@ -80,6 +80,7 @@ export function AdminRoom() {
                 onClick={() => handleMarkQuestionAsAnswered(question)}
               />
               <AnswerButton
+                isHighlighted={question.isHighlighted}
                 onClick={() => handleHighlightQuestion(question)}
               />
               <DeleteButton
