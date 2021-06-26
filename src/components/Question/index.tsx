@@ -1,12 +1,10 @@
 import { ReactNode } from 'react';
+import clsx from 'classnames';
 import './styles.scss';
 
 type QuestionProps = {
   children?: ReactNode;
   data: QuestionType;
-  roomId: string;
-  handleDelete?: (questionId: string) => void;
-  admin?: boolean;
 };
 
 export type QuestionType = {
@@ -23,10 +21,14 @@ export type QuestionType = {
 };
 
 export function Question({
-  data, roomId, children
+  data, children
 }: QuestionProps) {
   return (
-    <div className="question">
+    <div className={clsx(
+      'question',
+      { answered: data.isAnswered },
+      { highlighted: data.isHighlighted },
+    )}>
       <p>{data.content}</p>
       <footer>
         <div className="user-info">
