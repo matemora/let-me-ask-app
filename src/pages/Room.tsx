@@ -5,7 +5,8 @@ import { Button } from '../components/Button';
 import { RoomCode } from '../components/RoomCode';
 import { useAuth } from '../hooks/useAuth';
 import { database } from '../services/firebase';
-import { Question } from '../components/Question';
+import { Question, QuestionType } from '../components/Question';
+import { LikeButton } from '../components/LikeButton';
 
 import '../styles/room.scss';
 import { useRoom } from '../hooks/useRoom';
@@ -22,6 +23,16 @@ export function Room() {
   const { questions, title } = useRoom(roomId);
 
   // refatorar room para contexto
+
+  async function handleLikeButtonClick(question: QuestionType) {
+    if (question.userLikeId) {
+      await database.ref(`rooms/${roomId}/questions/${question.id}/likes/${question.userLikeId}`).remove();
+    } else {
+      await database.ref(`rooms/${roomId}/questions/${question.id}/likes`).push({
+        authorId: user?.id,
+      });
+    }
+  }
 
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
@@ -85,7 +96,13 @@ export function Room() {
               key={question.id}
               data={question}
               roomId={roomId}
-            />
+            >
+              <LikeButton
+                likeCount={question.likeCount}
+                liked={Boolean(question.userLikeId)}
+                handleClick={() => handleLikeButtonClick(question)}
+              />
+            </Question>
           ))}
         </div>
       </main>

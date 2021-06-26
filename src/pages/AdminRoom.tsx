@@ -1,16 +1,18 @@
+import { useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { database } from "../services/firebase";
-import { Question } from "../components/Question";
+import { Question, QuestionType } from "../components/Question";
 import { Button } from "../components/Button";
 import { RoomCode } from "../components/RoomCode";
 import { useRoom } from "../hooks/useRoom";
 import { DeleteIcon } from "../components/DeleteButton/DeleteIcon";
 import { Modal } from "../components/Modal";
 import { CloseCircleIcon } from "../components/CloseCircleIcon";
+import { CheckButton } from "../components/CheckButton";
+import { AnswerButton } from "../components/AnswerButton";
+import { DeleteButton } from "../components/DeleteButton";
 import logoImg from '../assets/images/logo.svg';
 import '../styles/room.scss';
-import { useState } from "react";
-import { useCallback } from "react";
 
 type RoomParams = {
   id: string;
@@ -22,7 +24,7 @@ export function AdminRoom() {
   const { questions, title } = useRoom(roomId);
   const [showCloseRoomModal, setShowCloseRoomModal] = useState(false);
   const [questionToDelete, setQuestionToDelete] = useState('');
-  console.log(questionToDelete);
+
   async function handleCloseRoom() {
     await database.ref(`rooms/${roomId}`).update({
       closedAt: new Date(),
@@ -33,6 +35,18 @@ export function AdminRoom() {
   const handleDeleteQuestion = useCallback(async (questionId: string) => {
     await database.ref(`rooms/${roomId}/questions/${questionId}`).remove();
     setQuestionToDelete('');
+  }, [roomId]);
+
+  const handleMarkQuestionAsAnswered = useCallback(async (question: QuestionType) => {
+    await database.ref(`rooms/${roomId}/questions/${question.id}`).update({
+      isAnswered: !question.isAnswered,
+    });
+  }, [roomId]);
+
+  const handleHighlightQuestion = useCallback(async (question: QuestionType) => {
+    await database.ref(`rooms/${roomId}/questions/${question.id}`).update({
+      isHIghlighted: !question.isHighlighted,
+    });
   }, [roomId]);
 
   return (
@@ -64,7 +78,17 @@ export function AdminRoom() {
               roomId={roomId}
               handleDelete={setQuestionToDelete}
               admin
-            />
+            >
+              <CheckButton
+                onClick={() => handleMarkQuestionAsAnswered(question)}
+              />
+              <AnswerButton
+                onClick={() => handleHighlightQuestion(question)}
+              />
+              <DeleteButton
+                onClick={() => setQuestionToDelete(question.id)}
+              />
+            </Question>
           ))}
         </div>
       </main>

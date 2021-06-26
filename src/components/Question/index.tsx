@@ -2,9 +2,13 @@ import { useAuth } from '../../hooks/useAuth';
 import { database } from '../../services/firebase';
 import { LikeButton } from '../LikeButton';
 import { DeleteButton } from '../DeleteButton';
+import { CheckButton } from '../CheckButton';
+import { AnswerButton } from '../AnswerButton';
 import './styles.scss';
+import { ReactNode } from 'react';
 
 type QuestionProps = {
+  children?: ReactNode;
   data: QuestionType;
   roomId: string;
   handleDelete?: (questionId: string) => void;
@@ -25,20 +29,8 @@ export type QuestionType = {
 };
 
 export function Question({
-  data, roomId, handleDelete, admin = false,
+  data, roomId, children
 }: QuestionProps) {
-  const { user } = useAuth();
-
-  async function handleLikeButtonClick() {
-    if (data.userLikeId) {
-      await database.ref(`rooms/${roomId}/questions/${data.id}/likes/${data.userLikeId}`).remove();
-    } else {
-      await database.ref(`rooms/${roomId}/questions/${data.id}/likes`).push({
-        authorId: user?.id,
-      });
-    }
-  }
-
   return (
     <div className="question">
       <p>{data.content}</p>
@@ -48,19 +40,7 @@ export function Question({
           <span>{data.author.name}</span>
         </div>
         <div className="actions">
-          {admin && handleDelete ? (
-            <>
-              <DeleteButton
-                onClick={() => handleDelete(data.id)}
-              />
-            </>
-          ) : (
-            <LikeButton
-              likeCount={data.likeCount}
-              liked={Boolean(data.userLikeId)}
-              handleClick={handleLikeButtonClick}
-            />
-          )}
+          {children}
         </div>
       </footer>
     </div>
