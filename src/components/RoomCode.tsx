@@ -5,16 +5,18 @@ type RoomCodeProps = {
   code: string;
 }
 
-export function RoomCode({code}: RoomCodeProps) {
+export function RoomCode({ code }: RoomCodeProps) {
   function copyRoomCodeToClipboard() {
     navigator.clipboard.writeText(code);
   }
   return (
-    <button className="room-code" onClick={copyRoomCodeToClipboard}>
-      <div>
-        <img src={copyImg} alt="copiar_codigo" />
-      </div>
-      <span>{`Sala #${code}`}</span>
-    </button>
+    <div style={{position: 'relative'}}>
+      <button className="room-code" onClick={copyRoomCodeToClipboard}>
+        <div>
+          <img src={copyImg} alt="copiar_codigo" />
+        </div>
+        <span>{`Sala #${code}`}</span>
+      </button>
+    </div>
   )
 }
