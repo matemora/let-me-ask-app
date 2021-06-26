@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { database } from "../services/firebase";
 import { Question, QuestionType } from "../components/Question";
 import { Button } from "../components/Button";
+import { Header } from "../components/Header";
 import { RoomCode } from "../components/RoomCode";
 import { useRoom } from "../hooks/useRoom";
 import { DeleteIcon } from "../components/DeleteButton/DeleteIcon";
@@ -11,7 +12,6 @@ import { CloseCircleIcon } from "../components/CloseCircleIcon";
 import { CheckButton } from "../components/CheckButton";
 import { AnswerButton } from "../components/AnswerButton";
 import { DeleteButton } from "../components/DeleteButton";
-import logoImg from '../assets/images/logo.svg';
 import '../styles/room.scss';
 
 type RoomParams = {
@@ -51,10 +51,8 @@ export function AdminRoom() {
 
   return (
     <div id="page-room">
-      <header>
-        <div className="content">
-          <img src={logoImg} alt="letmeask_logo" />
-          <div>
+      <Header>
+          <div className="room-controls">
             <RoomCode code={roomId} />
             <Button
               isOutlined
@@ -63,8 +61,7 @@ export function AdminRoom() {
               Encerrar sala
             </Button>
           </div>
-        </div>
-      </header>
+      </Header>
       <main>
         <div className="room-title">
           <h1>Sala {title}</h1>

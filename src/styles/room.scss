@@ -14,12 +14,12 @@
         max-height: 45px;
       }
 
-      >div {
-        display: flex;
-        gap: 16px;
-        button {
-          height: 40px;
-        }
+    }
+    .room-controls {
+      display: flex;
+      gap: 16px;
+      button {
+        height: 40px;
       }
     }
   }

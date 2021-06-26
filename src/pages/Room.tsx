@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import logoImg from '../assets/images/logo.svg';
+import { Header } from '../components/Header';
 import { Button } from '../components/Button';
 import { RoomCode } from '../components/RoomCode';
 import { useAuth } from '../hooks/useAuth';
@@ -16,13 +16,19 @@ type RoomParams = {
 }
 
 export function Room() {
-  const { user } = useAuth();
+  const { user, signInWithGoogle } = useAuth();
   const params = useParams<RoomParams>();
   const roomId = params.id;
   const [newQuestion, setNewQuestion] = useState('');
   const { questions, title } = useRoom(roomId);
 
   // refatorar room para contexto
+
+  const handleSignIn = async () => {
+    if (!user) {
+      await signInWithGoogle();
+    }
+  }
 
   async function handleLikeButtonClick(question: QuestionType) {
     if (question.userLikeId) {
@@ -61,12 +67,9 @@ export function Room() {
 
   return (
     <div id="page-room">
-      <header>
-        <div className="content">
-          <img src={logoImg} alt="letmeask_logo" />
-          <RoomCode code={roomId} />
-        </div>
-      </header>
+      <Header>
+        <RoomCode code={roomId} />
+      </Header>
       <main>
         <div className="room-title">
           <h1>Sala {title}</h1>
@@ -85,7 +88,7 @@ export function Room() {
                 <span>{user.name}</span>
               </div>
             ) : (
-              <span>Para enviar uma pergunta, <button>faça seu login</button>.</span>
+              <span>Para enviar uma pergunta, <button onClick={handleSignIn}>faça seu login</button>.</span>
             )}
             <Button type="submit" disabled={!user}>Enviar pergunta</Button>
           </div>
