@@ -1,11 +1,5 @@
-import { useAuth } from '../../hooks/useAuth';
-import { database } from '../../services/firebase';
-import { LikeButton } from '../LikeButton';
-import { DeleteButton } from '../DeleteButton';
-import { CheckButton } from '../CheckButton';
-import { AnswerButton } from '../AnswerButton';
-import './styles.scss';
 import { ReactNode } from 'react';
+import './styles.scss';
 
 type QuestionProps = {
   children?: ReactNode;
