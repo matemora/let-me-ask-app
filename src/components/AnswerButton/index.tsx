@@ -1,15 +1,18 @@
 import { ButtonHTMLAttributes } from "react";
 import { AnswerIcon } from './AnswerIcon';
+import clsx from 'classnames';
 import './styles.scss';
 
-type AnswerButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
+type AnswerButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  isHighlighted?: boolean;
+};
 
 export function AnswerButton({
-  onClick
+  isHighlighted, onClick
 }: AnswerButtonProps) {
   return (
     <button
-      className="answer-button"
+      className={clsx('answer-button', { highlighted: isHighlighted })}
       type="button"
       aria-label="Destacar questão sendo respondida"
       onClick={onClick}

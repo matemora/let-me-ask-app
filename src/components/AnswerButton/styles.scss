@@ -1,3 +1,8 @@
+@mixin highlighted {
+  svg path {
+    stroke: #835afd;
+  }
+}
 .answer-button {
   border: 0;
   background: transparent;
@@ -9,10 +14,12 @@
   svg path {
     transition: all 0.2s;
   }
+
+  &.highlighted {
+    @include highlighted()
+  }
   
   &:hover {
-    svg path {
-      stroke: #835afd;
-    }
+    @include highlighted()
   }
 }
