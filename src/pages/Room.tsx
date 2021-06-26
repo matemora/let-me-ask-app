@@ -96,11 +96,13 @@ export function Room() {
               key={question.id}
               data={question}
             >
-              <LikeButton
-                likeCount={question.likeCount}
-                liked={Boolean(question.userLikeId)}
-                handleClick={() => handleLikeButtonClick(question)}
-              />
+              {!question.isAnswered && (
+                <LikeButton
+                  likeCount={question.likeCount}
+                  liked={Boolean(question.userLikeId)}
+                  handleClick={() => handleLikeButtonClick(question)}
+                />
+              )}
             </Question>
           ))}
         </div>

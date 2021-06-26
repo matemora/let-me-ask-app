@@ -76,13 +76,17 @@ export function AdminRoom() {
               key={question.id}
               data={question}
             >
-              <CheckButton
-                onClick={() => handleMarkQuestionAsAnswered(question)}
-              />
-              <AnswerButton
-                isHighlighted={question.isHighlighted && !question.isAnswered}
-                onClick={() => handleHighlightQuestion(question)}
-              />
+              {!question.isAnswered && (
+                <>
+                  <CheckButton
+                    onClick={() => handleMarkQuestionAsAnswered(question)}
+                  />
+                  <AnswerButton
+                    isHighlighted={question.isHighlighted && !question.isAnswered}
+                    onClick={() => handleHighlightQuestion(question)}
+                  />
+                </>
+              )}
               <DeleteButton
                 onClick={() => setQuestionToDelete(question.id)}
               />
