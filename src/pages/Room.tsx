@@ -95,7 +95,6 @@ export function Room() {
             <Question
               key={question.id}
               data={question}
-              roomId={roomId}
             >
               <LikeButton
                 likeCount={question.likeCount}

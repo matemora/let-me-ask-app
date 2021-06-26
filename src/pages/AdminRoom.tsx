@@ -75,9 +75,6 @@ export function AdminRoom() {
             <Question
               key={question.id}
               data={question}
-              roomId={roomId}
-              handleDelete={setQuestionToDelete}
-              admin
             >
               <CheckButton
                 onClick={() => handleMarkQuestionAsAnswered(question)}
