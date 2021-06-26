@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { database } from "../services/firebase";
 import { Question, QuestionType } from "../components/Question";
 import { Button } from "../components/Button";
+import { Logout } from "../components/Logout";
 import { Header } from "../components/Header";
 import { RoomCode } from "../components/RoomCode";
 import { useRoom } from "../hooks/useRoom";
@@ -52,15 +53,14 @@ export function AdminRoom() {
   return (
     <div id="page-room">
       <Header>
-          <div className="room-controls">
-            <RoomCode code={roomId} />
-            <Button
-              isOutlined
-              onClick={() => setShowCloseRoomModal(true)}
-            >
-              Encerrar sala
-            </Button>
-          </div>
+        <RoomCode code={roomId} />
+        <Button
+          isOutlined
+          onClick={() => setShowCloseRoomModal(true)}
+        >
+          Encerrar sala
+        </Button>
+        <Logout />
       </Header>
       <main>
         <div className="room-title">

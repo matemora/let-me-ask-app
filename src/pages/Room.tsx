@@ -2,6 +2,7 @@ import { FormEvent, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Button } from '../components/Button';
+import { Logout } from '../components/Logout';
 import { RoomCode } from '../components/RoomCode';
 import { useAuth } from '../hooks/useAuth';
 import { database } from '../services/firebase';
@@ -69,6 +70,7 @@ export function Room() {
     <div id="page-room">
       <Header>
         <RoomCode code={roomId} />
+        <Logout />
       </Header>
       <main>
         <div className="room-title">
