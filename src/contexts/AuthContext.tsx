@@ -32,7 +32,7 @@ export const AuthContextProvider: FC = ({children}) => {
           id: uid,
           name: displayName,
           avatar: photoURL,
-        })
+        });
       }
     });
 
@@ -59,8 +59,9 @@ export const AuthContextProvider: FC = ({children}) => {
 
   async function signOut() {
     await auth.signOut();
+    setUser(undefined);
   }
-  
+
   return (
     <AuthContext.Provider value={{ user, signInWithGoogle, signOut }}>
       {children}
