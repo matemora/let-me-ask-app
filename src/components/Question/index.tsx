@@ -27,7 +27,7 @@ export function Question({
     <div className={clsx(
       'question',
       { answered: data.isAnswered },
-      { highlighted: data.isHighlighted },
+      { highlighted: data.isHighlighted && !data.isAnswered },
     )}>
       <p>{data.content}</p>
       <footer>

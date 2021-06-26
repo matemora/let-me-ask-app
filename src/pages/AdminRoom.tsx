@@ -80,7 +80,7 @@ export function AdminRoom() {
                 onClick={() => handleMarkQuestionAsAnswered(question)}
               />
               <AnswerButton
-                isHighlighted={question.isHighlighted}
+                isHighlighted={question.isHighlighted && !question.isAnswered}
                 onClick={() => handleHighlightQuestion(question)}
               />
               <DeleteButton
