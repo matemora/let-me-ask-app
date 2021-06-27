@@ -6,6 +6,8 @@
   --text-primary: #29292e;
   --text-secondary:#737380;
   --primary: #835afd;
+  --question-highlighted: #F4F0FF;
+  --question-answered: #DBDCDD;
 }
 
 [data-theme="dark"] {
@@ -16,6 +18,8 @@
   --text-primary: #f8f8f8;
   --text-secondary:#d4d4d4;
   --primary: #835afd;
+  --question-highlighted: #4D4D51;
+  --question-answered: ##29292e;
 }
 
 * {
