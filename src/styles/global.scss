@@ -1,12 +1,18 @@
 :root {
   --background-color: #F8F8F8;
+  --card-background: #FEFEFE;
+  --button-outlined-background: #FFFFFF;
   --text-primary: #29292e;
+  --text-secondary:#737380;
   --primary: #835afd;
 }
 
 [data-theme="dark"] {
+  --card-background: #343439;
   --background-color: #29292e;
-  --text-primary: #F8F8F8;
+  --button-outlined-background: #343439;
+  --text-primary: #f8f8f8;
+  --text-secondary:#d4d4d4;
   --primary: #835afd;
 }
 
@@ -16,7 +22,7 @@
   box-sizing: border-box;
 }
 
-.app {
+body {
   background-color: var(--background-color);
   color: var(--text-primary);
 }

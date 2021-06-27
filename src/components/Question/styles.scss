@@ -1,5 +1,5 @@
 .question {
-  background: #fefefe;
+  background: var(--card-background);
   width: 100%;
   min-height: 150px;
   padding: 24px;
@@ -11,7 +11,7 @@
     border: 1px solid #835afd;
     
     footer .user-info span {
-      color: #29292e;
+      color: var(--text-primary);
     }
   }
   
@@ -29,7 +29,7 @@
   
   p {
     min-height: 48px;
-    color: #29292e;
+    color: var(--text-primary);
   }
 
   footer {
@@ -51,7 +51,7 @@
       span {
         margin-left: 8px;
         font-size: 14px;
-        color: #737380;
+        color: var(--text-secondary);
       }
     }
 
