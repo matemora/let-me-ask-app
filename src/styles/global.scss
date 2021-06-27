@@ -1,12 +1,24 @@
+:root {
+  --background-color: #F8F8F8;
+  --text-primary: #29292e;
+  --primary: #835afd;
+}
+
+[data-theme="dark"] {
+  --background-color: #29292e;
+  --text-primary: #F8F8F8;
+  --primary: #835afd;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  background-color: #F8F8F8;
-  color: #29292e;
+.app {
+  background-color: var(--background-color);
+  color: var(--text-primary);
 }
 
 body, input, button, textarea {
