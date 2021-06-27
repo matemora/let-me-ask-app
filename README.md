@@ -11,6 +11,18 @@ App developed during [rocketseat's next level week event](https://rocketseat.com
 ![image](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
 ![image](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)
 
+## Features
+
+1. Create a Q&A room
+2. Join existing room
+3. Ask questions
+4. Like other people questions
+5. As room admin, highlight question currently beeing answered
+6. Delete question
+7. Mark question as answered
+
+This app supports dark mode.
+
 ## Steps to run locally
 
 In order to run the app locally you have to:
