@@ -8,6 +8,7 @@ export function ThemeControl() {
       title={theme === 'light' ? 'Modo escuro' : 'Modo claro'}
       isOutlined
       onClick={toggleTheme}
+      style={{padding: '0 16px'}}
     >
       {theme === 'light' ? (
         <span>🌜</span>
