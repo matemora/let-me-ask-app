@@ -1,7 +1,7 @@
 .room-code {
   border-radius: 8px;
   overflow: hidden;
-  background: #fff;
+  background: var(--button-outlined-background);
   color: transparent;
   border: 1px solid #835afd;
   cursor: pointer;
@@ -30,7 +30,7 @@
   &:hover {
     span {
       width: 240px;
-      color: #29292e;
+      color: var(--text-primary);
       padding: 0 16px 0 12px;
     }
 
