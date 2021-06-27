@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createContext, ReactNode, useState } from "react";
 
 type ThemeContextType = {
@@ -16,7 +17,11 @@ export function ThemeContextProvider({children}: ThemeContextProviderProps) {
     const userTheme = localStorage.getItem('LETMEASK_DATA_THEME') as ThemeContextType['theme'];
     return userTheme ?? 'light';
   });
-
+  
+  useEffect(() => {
+    document.body.setAttribute('data-theme', theme);
+  }, [theme]);
+    
   function toggleTheme() {
     localStorage.setItem('LETMEASK_DATA_THEME', theme === 'light' ? 'dark' : 'light');
     setTheme(previousTheme => previousTheme === 'light' ? 'dark' : 'light');
@@ -24,7 +29,7 @@ export function ThemeContextProvider({children}: ThemeContextProviderProps) {
 
   return (
     <ThemeContext.Provider value={{theme, toggleTheme}}>
-      <div data-theme={theme} className="app">
+      <div data-theme={theme}>
         {children}
       </div>
     </ThemeContext.Provider>
