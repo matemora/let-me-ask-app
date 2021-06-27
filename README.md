@@ -6,7 +6,7 @@ Simple real-time Q&A app to be used on livestreams, podcasts and other live even
 
 Live version: [let-me-ask-app.web.app](https://let-me-ask-app.web.app/)
 
-App developed during [rocketseat's next level week event](https://rocketseat.com.br/).
+App developed during [rocketseat](https://rocketseat.com.br/)'s next level week event.
 
 ![image](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
 ![image](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
