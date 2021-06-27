@@ -5,7 +5,6 @@ import { Question, QuestionType } from "../components/Question";
 import { Button } from "../components/Button";
 import { Logout } from "../components/Logout";
 import { Header } from "../components/Header";
-import { RoomCode } from "../components/RoomCode";
 import { useRoom } from "../hooks/useRoom";
 import { DeleteIcon } from "../components/DeleteButton/DeleteIcon";
 import { Modal } from "../components/Modal";
@@ -53,7 +52,6 @@ export function AdminRoom() {
   return (
     <div id="page-room">
       <Header>
-        <RoomCode code={roomId} />
         <Button
           isOutlined
           onClick={() => setShowCloseRoomModal(true)}
